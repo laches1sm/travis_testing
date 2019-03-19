@@ -1,0 +1,38 @@
+dist: trusty
+language: go
+go: 
+    - 1.11.x
+
+services: 
+    - docker
+
+git: 
+   depth: 1000000 # need to figure out what this means
+env:
+  global:
+    - ROOT_DIR=$PWD # set the rootdir to the current directory
+  matrix:
+    # here be WORK_DIRs
+    - WORK_DIR=.
+
+before_install: 
+    # commands to be ran before travis is installed 
+    # installs any dependenices 
+    # question: will goa have to be included in this??
+
+install:
+
+script: 
+   # this runs the build script 
+   # there is also a before_script for those commands that
+   # need to be ran before the build script is run
+ - if[[ "$WORK_DIR" != "doge" ]]; then make generate; fi
+ - pushd $TRAVIS_BUILD_DIR/$WORK_DIR
+ - if [["$WORK_DIR" != "doge" ]]; then make test; fi
+
+before_deploy:
+  # this is for any commands that have to be ran before 
+  # the service is deployed 
+
+deploy: 
+  # holds details for deployment
