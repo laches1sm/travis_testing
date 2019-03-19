@@ -26,7 +26,7 @@ script:
    # this runs the build script 
    # there is also a before_script for those commands that
    # need to be ran before the build script is run
- - if[[ "$WORK_DIR" != "doge" ]]; then make generate; fi
+ - if[[ "$WORK_DIR" != "doge" ]]; then make build; fi
  - pushd $TRAVIS_BUILD_DIR/$WORK_DIR
  - if [["$WORK_DIR" != "doge" ]]; then make test; fi
 
